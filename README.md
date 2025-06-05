@@ -1,3 +1,7 @@
+# PARA ABRIR EL SERVER
+    - Correr app.py
+    - Entrar a: http://127.0.0.1:5000
+
 # rede_neuronal
 Rede neuronal para el análisis algorítmico y estructuras de datos
 

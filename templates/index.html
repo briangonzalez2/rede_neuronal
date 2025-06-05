@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predicción de Complejidad</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_menu.css') }}">
+</head>
+<body>
+    <h1>Analizador de Complejidad Algorítmica</h1>
+
+    <form method="POST">
+        <label for="code">Ingresa tu código Python:</label><br>
+        <textarea name="code" rows="15" cols="80" placeholder="Escribe tu código aquí...">{{ code or '' }}</textarea><br>
+        <button type="submit">Predecir</button>
+    </form>
+
+    {% if result %}
+        <h2>Predicción:</h2>
+        <ul>
+            <li><strong>O:</strong> {{ result['O'] }}</li>
+            <li><strong>Ω:</strong> {{ result['Ω'] }}</li>
+            <li><strong>Θ:</strong> {{ result['Θ'] }}</li>
+        </ul>
+    {% endif %}
+</body>
+</html>

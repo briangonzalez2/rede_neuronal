@@ -1,6 +1,6 @@
 import torch
 from transformers import AutoTokenizer, AutoModel
-from logica.utils import preprocess_code
+from logic.utils import preprocess_code
 
 # Cargar modelo (simulado como una red densa)
 class DummyModel(torch.nn.Module):
