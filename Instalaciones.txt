@@ -3,3 +3,5 @@ pip install psycopg2-binary
 pip install Flask-SQLAlchemy
 pip install torch
 pip install transformers
+pip install transformers datasets torch libcst
+pip install transformers torch libcst
