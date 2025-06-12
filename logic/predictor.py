@@ -1,7 +1,7 @@
 import torch
-from tokenizer import simple_tokenizer
-from label_encoder import decode_O, decode_omega, decode_theta
-from train_model import MultiOutputModel
+from .tokenizer import simple_tokenizer
+from .label_encoder import decode_O, decode_omega, decode_theta
+from .train_model import MultiOutputModel
 
 def predict_complexity(code_snippet):
     tokens = simple_tokenizer(code_snippet)
@@ -9,7 +9,7 @@ def predict_complexity(code_snippet):
     vector += [0] * (256 - len(vector))
 
     input_tensor = torch.tensor([vector], dtype=torch.float32)
-    model = MultiOutputModel(256, 128, 8)
+    model = MultiOutputModel(256, 128, 19) # 19 posibles etiquetas
     model.load_state_dict(torch.load("models/complexity_model.pt", map_location="cpu"))
     model.eval()
 

@@ -3,8 +3,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from sklearn.model_selection import train_test_split
-from tokenizer import simple_tokenizer
-from label_encoder import encode_labels, decode_O, decode_omega, decode_theta
+from .tokenizer import simple_tokenizer
+from .label_encoder import encode_labels, decode_O, decode_omega, decode_theta
 
 # Modelo multitarea
 class MultiOutputModel(nn.Module):

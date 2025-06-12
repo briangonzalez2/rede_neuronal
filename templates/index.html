@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Predicción de Complejidad</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main_menu.css') }}">
 </head>
 <body>
-    <h1>Analizador de Complejidad Algorítmica</h1>
-
+    <h1>🔍 Predicción de Complejidad Algorítmica</h1>
     <form method="POST">
-        <label for="code">Ingresa tu código Python:</label><br>
-        <textarea name="code" rows="15" cols="80" placeholder="Escribe tu código aquí...">{{ code or '' }}</textarea><br>
+        <label for="code">Escribe tu código Python aquí:</label><br>
+        <textarea name="code" id="code" required>{{ request.form.code or '' }}</textarea><br>
         <button type="submit">Predecir</button>
     </form>
 
-    {% if result %}
-        <h2>Predicción:</h2>
-        <ul>
-            <li><strong>O:</strong> {{ result['O'] }}</li>
-            <li><strong>Ω:</strong> {{ result['Ω'] }}</li>
-            <li><strong>Θ:</strong> {{ result['Θ'] }}</li>
-        </ul>
+    {% if prediction %}
+    <div class="result">
+        <h3>Resultado:</h3>
+        <p><strong>O:</strong> {{ prediction['O'] }}</p>
+        <p><strong>Ω:</strong> {{ prediction['Ω'] }}</p>
+        <p><strong>Θ:</strong> {{ prediction['Θ'] }}</p>
+    </div>
     {% endif %}
 </body>
 </html>
