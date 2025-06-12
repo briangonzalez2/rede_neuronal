@@ -232,6 +232,123 @@ def heap_sort(arr):
         "O": "O(n + k)",
         "Ω": "Ω(n + k)",
         "Θ": "Θ(n + k)"
+    },
+    {
+        "name": "permutations",
+        "code": """def permutations(lst):
+    if len(lst) <= 1:
+        return [lst]
+    result = []
+    for i in range(len(lst)):
+        n = lst.pop(0)
+        perms = permutations(lst)
+        for perm in perms:
+            result.append([n] + perm)
+        lst.append(n)
+    return result
+""",
+        "O": "O(n!)",
+        "Ω": "Ω(n!)",
+        "Θ": "Θ(n!)"
+    },
+    {
+        "name": "floyd_warshall",
+        "code": """def floyd_warshall(graph):
+    V = len(graph)
+    dist = [[float('inf')] * V for _ in range(V)]
+    for i in range(V):
+        for j in range(V):
+            dist[i][j] = graph[i][j]
+    for k in range(V):
+        for i in range(V):
+            for j in range(V):
+                if dist[i][k] != float('inf') and dist[k][j] != float('inf'):
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+    return dist
+""",
+        "O": "O(V^3)",
+        "Ω": "Ω(V^3)",
+        "Θ": "Θ(V^3)"
+    },
+    {
+        "name": "prim_mst",
+        "code": """import heapq
+def prim_mst(graph):
+    V = len(graph)
+    visited = [False] * V
+    pq = [(0, 0)]
+    total_weight = 0
+    while pq:
+        weight, u = heapq.heappop(pq)
+        if visited[u]:
+            continue
+        visited[u] = True
+        total_weight += weight
+        for v, w in graph[u]:
+            if not visited[v]:
+                heapq.heappush(pq, (w, v))
+    return total_weight
+""",
+        "O": "O(E log V)",
+        "Ω": "Ω(E log V)",
+        "Θ": "Θ(E log V)"
+    },
+    {
+        "name": "strassen_matrix",
+        "code": """def strassen_matrix(A, B):
+    n = len(A)
+    if n <= 1:
+        return [[A[0][0] * B[0][0]]]
+    mid = n // 2
+    A11 = [[A[i][j] for j in range(mid)] for i in range(mid)]
+    A12 = [[A[i][j] for j in range(mid, n)] for i in range(mid)]
+    A21 = [[A[i][j] for j in range(mid)] for i in range(mid, n)]
+    A22 = [[A[i][j] for j in range(mid, n)] for i in range(mid, n)]
+    B11 = [[B[i][j] for j in range(mid)] for i in range(mid)]
+    B12 = [[B[i][j] for j in range(mid, n)] for i in range(mid)]
+    B21 = [[B[i][j] for j in range(mid)] for i in range(mid, n)]
+    B22 = [[B[i][j] for j in range(mid, n)] for i in range(mid, n)]
+    P1 = strassen_matrix([[A11[i][j] + A22[i][j] for j in range(mid)] for i in range(mid)], [[B11[i][j] + B22[i][j] for j in range(mid)] for i in range(mid)])
+    P2 = strassen_matrix([[A21[i][j] + A22[i][j] for j in range(mid)] for i in range(mid)], B11)
+    P3 = strassen_matrix(A11, [[B12[i][j] - B22[i][j] for j in range(mid)] for i in range(mid)])
+    P4 = strassen_matrix(A22, [[B21[i][j] - B11[i][j] for j in range(mid)] for i in range(mid)])
+    P5 = strassen_matrix([[A11[i][j] + A12[i][j] for j in range(mid)] for i in range(mid)], B22)
+    P6 = strassen_matrix([[A21[i][j] - A11[i][j] for j in range(mid)] for i in range(mid)], [[B11[i][j] + B12[i][j] for j in range(mid)] for i in range(mid)])
+    P7 = strassen_matrix([[A12[i][j] - A22[i][j] for j in range(mid)] for i in range(mid)], [[B21[i][j] + B22[i][j] for j in range(mid)] for i in range(mid)])
+    C11 = [[P1[i][j] + P4[i][j] - P5[i][j] + P7[i][j] for j in range(mid)] for i in range(mid)]
+    C12 = [[P3[i][j] + P5[i][j] for j in range(mid)] for i in range(mid)]
+    C21 = [[P2[i][j] + P4[i][j] for j in range(mid)] for i in range(mid)]
+    C22 = [[P1[i][j] - P2[i][j] + P3[i][j] + P6[i][j] for j in range(mid)] for i in range(mid)]
+    C = [[0] * n for _ in range(n)]
+    for i in range(mid):
+        for j in range(mid):
+            C[i][j] = C11[i][j]
+            C[i][j + mid] = C12[i][j]
+            C[i + mid][j] = C21[i][j]
+            C[i + mid][j + mid] = C22[i][j]
+    return C
+""",
+        "O": "O(n^2.807)",
+        "Ω": "Ω(n^2.807)",
+        "Θ": "Θ(n^2.807)"
+    },
+    {
+        "name": "lcs",
+        "code": """def lcs(X, Y):
+    m = len(X)
+    n = len(Y)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if X[i-1] == Y[j-1]:
+                dp[i][j] = dp[i-1][j-1] + 1
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+    return dp[m][n]
+""",
+        "O": "O(nm)",
+        "Ω": "Ω(nm)",
+        "Θ": "Θ(nm)"
     }
 ]
 
@@ -240,11 +357,17 @@ class MultiOutputModel(nn.Module):
         super().__init__()
         self.shared = nn.Sequential(
             nn.Linear(input_size, hidden_size),
-            nn.ReLU()
+            nn.BatchNorm1d(hidden_size),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(hidden_size, hidden_size // 2),
+            nn.BatchNorm1d(hidden_size // 2),
+            nn.ReLU(),
+            nn.Dropout(0.3)
         )
-        self.output_O = nn.Linear(hidden_size, output_size)
-        self.output_omega = nn.Linear(hidden_size, output_size)
-        self.output_theta = nn.Linear(hidden_size, output_size)
+        self.output_O = nn.Linear(hidden_size // 2, output_size)
+        self.output_omega = nn.Linear(hidden_size // 2, output_size)
+        self.output_theta = nn.Linear(hidden_size // 2, output_size)
 
     def forward(self, x):
         features = self.shared(x)
@@ -260,11 +383,12 @@ def load_dataset(path="dataset/ast_dataset_ast.json"):
     X, y_O, y_omega, y_theta = [], [], [], []
     for item in data:
         tokens = ast_tokenizer(item["code"])
-        X.append(tokens)
-        o, omega, theta = encode_labels(item)
-        y_O.append(o)
-        y_omega.append(omega)
-        y_theta.append(theta)
+        if sum(tokens) > 0:
+            X.append(tokens)
+            o, omega, theta = encode_labels(item)
+            y_O.append(o)
+            y_omega.append(omega)
+            y_theta.append(theta)
     return (
         torch.tensor(X, dtype=torch.float32),
         torch.tensor(y_O),
@@ -278,11 +402,12 @@ def train():
         X, y_O, y_omega, y_theta, test_size=0.2
     )
 
-    model = MultiOutputModel(256, 128, 19)
+    model = MultiOutputModel(256, 256, 26)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    optimizer = optim.Adam(model.parameters(), lr=0.0005)
+    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
 
-    for epoch in range(20):
+    for epoch in range(30):
         model.train()
         optimizer.zero_grad()
         out_O, out_omega, out_theta = model(X_train)
@@ -292,6 +417,7 @@ def train():
         loss = loss_O + loss_omega + loss_theta
         loss.backward()
         optimizer.step()
+        scheduler.step()
 
         acc_O = (out_O.argmax(1) == y_O_train).float().mean()
         acc_omega = (out_omega.argmax(1) == y_omega_train).float().mean()
