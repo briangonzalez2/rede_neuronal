@@ -1,0 +1,79 @@
+[
+  {
+    "codigo": "binary_search.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='binary_search', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(log n)",
+    "\u03a9": "\u03a9(1)",
+    "\u0398": "\u0398(log n)"
+  },
+  {
+    "codigo": "bubble_sort.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='bubble_sort', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(n^2)",
+    "\u03a9": "\u03a9(n)",
+    "\u0398": "\u0398(n^2)"
+  },
+  {
+    "codigo": "counting_sort.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='counting_sort', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(n + k)",
+    "\u03a9": "\u03a9(n + k)",
+    "\u0398": "\u0398(n + k)"
+  },
+  {
+    "codigo": "dfs_graph.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='dfs_graph', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(V + E)",
+    "\u03a9": "\u03a9(V)",
+    "\u0398": "\u0398(V + E)"
+  },
+  {
+    "codigo": "heap_sort.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='heap_sort', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(n log n)",
+    "\u03a9": "\u03a9(n log n)",
+    "\u0398": "\u0398(n log n)"
+  },
+  {
+    "codigo": "insertion_sort.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='insertion_sort', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(n^2)",
+    "\u03a9": "\u03a9(n)",
+    "\u0398": "\u0398(n^2)"
+  },
+  {
+    "codigo": "linear_search.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='linear_search', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(n)",
+    "\u03a9": "\u03a9(1)",
+    "\u0398": "\u0398(n)"
+  },
+  {
+    "codigo": "merge_sort.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='merge_sort', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(n log n)",
+    "\u03a9": "\u03a9(n log n)",
+    "\u0398": "\u0398(n log n)"
+  },
+  {
+    "codigo": "quick_sort.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='quick_sort', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(n^2)",
+    "\u03a9": "\u03a9(n log n)",
+    "\u0398": "\u0398(n log n)"
+  },
+  {
+    "codigo": "radix_sort.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='radix_sort', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(nk)",
+    "\u03a9": "\u03a9(nk)",
+    "\u0398": "\u0398(nk)"
+  },
+  {
+    "codigo": "selection_sort.py",
+    "ast": "Module(body=[Expr(value=Attribute(value=Name(id='selection_sort', ctx=Load()), attr='py', ctx=Load()))])",
+    "O": "O(n^2)",
+    "\u03a9": "\u03a9(n^2)",
+    "\u0398": "\u0398(n^2)"
+  }
+]

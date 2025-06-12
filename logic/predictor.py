@@ -1,37 +1,27 @@
 import torch
-from transformers import AutoTokenizer, AutoModel
-from logic.utils import preprocess_code
+from tokenizer import simple_tokenizer
+from label_encoder import decode_O, decode_omega, decode_theta
+from train_model import MultiOutputModel
 
-# Cargar modelo (simulado como una red densa)
-class DummyModel(torch.nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.linear = torch.nn.Linear(768, 3)  # O, Omega, Theta
+def predict_complexity(code_snippet):
+    tokens = simple_tokenizer(code_snippet)
+    vector = [ord(c) for c in tokens][:256]
+    vector += [0] * (256 - len(vector))
 
-    def forward(self, x):
-        return self.linear(x)
+    input_tensor = torch.tensor([vector], dtype=torch.float32)
+    model = MultiOutputModel(256, 128, 8)
+    model.load_state_dict(torch.load("models/complexity_model.pt", map_location="cpu"))
+    model.eval()
 
-# Modelo dummy (reemplaza con tu modelo real)
-model = DummyModel()
-model.load_state_dict(torch.load("models/complexity_model.pt", map_location="cpu"))
-model.eval()
-
-# Tokenizador simulado (reemplaza con tokenizer real)
-tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
-codebert = AutoModel.from_pretrained("microsoft/codebert-base")
-
-LABELS = ["O(n)", "Ω(n)", "Θ(n)"]  # ejemplo básico
-
-def predict_complexity(code):
-    cleaned = preprocess_code(code)
-    tokens = tokenizer(cleaned, return_tensors="pt", truncation=True, padding=True)
     with torch.no_grad():
-        embeddings = codebert(**tokens).last_hidden_state.mean(dim=1)
-        logits = model(embeddings)
-        probs = torch.nn.functional.softmax(logits, dim=1)
-    top_preds = torch.argmax(probs, dim=1)
+        out_O, out_omega, out_theta = model(input_tensor)
+        pred_O = decode_O(out_O.argmax().item())
+        pred_omega = decode_omega(out_omega.argmax().item())
+        pred_theta = decode_theta(out_theta.argmax().item())
+
     return {
-        "O": LABELS[top_preds[0].item()],
-        "Ω": LABELS[top_preds[0].item()],
-        "Θ": LABELS[top_preds[0].item()]
+        "O": pred_O,
+        "Ω": pred_omega,
+        "Θ": pred_theta
     }
+

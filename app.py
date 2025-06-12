@@ -1,17 +1,26 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, jsonify
 from logic.predictor import predict_complexity
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    result = None
-    code = ""
-    if request.method == "POST":
-        code = request.form.get("code", "")
-        if code.strip():
-            result = predict_complexity(code)
-    return render_template("index.html", result=result, code=code)
+@app.route("/")
+def home():
+    return "🚀 API de Red Neuronal para Complejidad Algorítmica"
+
+@app.route("/predecir", methods=["POST"])
+def predecir():
+    data = request.get_json()
+    if not data or "codigo" not in data:
+        return jsonify({"error": "Falta el campo 'codigo'"}), 400
+
+    resultado = predict_complexity(data["codigo"])
+
+    return jsonify({
+        "O": resultado["O"],
+        "Ω": resultado["Ω"],
+        "Θ": resultado["Θ"]
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)
+

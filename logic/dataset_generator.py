@@ -2,8 +2,8 @@
 
 import random
 import textwrap
-from logic.algorithms_base import algorithms
-from logic.utils import tokenize_code, extract_ast_features, preprocess_code
+from algorithms_base import algorithms
+from utils import tokenize_code, extract_ast_features, preprocess_code
 
 
 def randomize_code(code):
