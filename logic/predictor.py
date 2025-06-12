@@ -1,15 +1,12 @@
 import torch
-from .tokenizer import simple_tokenizer
+from .tokenizer import ast_tokenizer
 from .label_encoder import decode_O, decode_omega, decode_theta
-from .train_model import MultiOutputModel
+from .algorithms_base import MultiOutputModel
 
 def predict_complexity(code_snippet):
-    tokens = simple_tokenizer(code_snippet)
-    vector = [ord(c) for c in tokens][:256]
-    vector += [0] * (256 - len(vector))
-
-    input_tensor = torch.tensor([vector], dtype=torch.float32)
-    model = MultiOutputModel(256, 128, 19) # 19 posibles etiquetas
+    tokens = ast_tokenizer(code_snippet)
+    input_tensor = torch.tensor([tokens], dtype=torch.float32)
+    model = MultiOutputModel(256, 128, 19)
     model.load_state_dict(torch.load("models/complexity_model.pt", map_location="cpu"))
     model.eval()
 
@@ -24,4 +21,3 @@ def predict_complexity(code_snippet):
         "Ω": pred_omega,
         "Θ": pred_theta
     }
-

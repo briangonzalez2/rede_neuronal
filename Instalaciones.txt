@@ -6,3 +6,4 @@ pip install transformers
 pip install transformers datasets torch libcst
 pip install transformers torch libcst
 pip install scikit-learn
+pip install torch-geometric
