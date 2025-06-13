@@ -38,7 +38,7 @@ def generate_queue_sequence(n_ops=10):
 
 os.makedirs("dataset", exist_ok=True)
 data = []
-for _ in range(1000):
+for _ in range(50000):
     stack_seq = generate_stack_sequence()
     if stack_seq["sequence"]:
         data.append(stack_seq)

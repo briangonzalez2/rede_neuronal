@@ -101,7 +101,7 @@ def merge_sort_steps(arr):
     return steps
 
 data = []
-for _ in range(200):  # 200 experiments per algorithm
+for _ in range(600):  # 200 experiments per algorithm
     arr = np.random.randint(0, 100, 10).tolist()
     data.extend(bubble_sort_steps(arr))
     data.extend(insertion_sort_steps(arr))

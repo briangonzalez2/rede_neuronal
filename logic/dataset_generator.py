@@ -49,7 +49,7 @@ def generate_variation(code, name):
         print(f"Error in variation for {name}: {e}")
         return code
 
-def generate_dataset(num_variations=133):
+def generate_dataset(num_variations=1000):
     start_time = time.time()
     data = []
     for idx, algo in enumerate(algorithms):

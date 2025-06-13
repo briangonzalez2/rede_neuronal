@@ -57,7 +57,7 @@ def tree_to_graph(root):
     return nodes, edges
 
 data = []
-for _ in range(1000):
+for _ in range(50000):
     root = generate_random_bst()
     nodes, edges = tree_to_graph(root)
     inorder = get_inorder(root, [])
