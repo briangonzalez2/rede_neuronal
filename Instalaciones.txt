@@ -7,3 +7,6 @@ pip install transformers datasets torch libcst
 pip install transformers torch libcst
 pip install scikit-learn
 pip install torch-geometric
+pip install gym stable-baselines3
+pip install shimmy
+pip install gymnasium        
